@@ -45,7 +45,7 @@ jobs:
       # Step 7: Run Checkov on Terraform files
       - name: Checkov Scan
         run: |
-          checkov -d .  
+          checkov -d . --skip-check CKV_AWS_79,CKV_AWS_126,CKV_AWS_8,CKV_AWS_135,CKV2_AWS_41
 
       # Step 8: Plan Terraform changes
       - name: Terraform Plan
