@@ -7,7 +7,7 @@ on:
       - master
 
 permissions:
-  contents: write    
+  contents: read   
   id-token: write   
   pull-requests: write
 
@@ -61,15 +61,15 @@ jobs:
         run: terraform apply --auto-approve
 
       # Step 10: Install terraform-docs
-      - name: Install terraform-docs
-        run: |
-          curl -sLo terraform-docs.tar.gz https://github.com/terraform-docs/terraform-docs/releases/download/v0.16.0/terraform-docs-v0.16.0-linux-amd64.tar.gz
-          tar -xzf terraform-docs.tar.gz
-          sudo mv terraform-docs /usr/local/bin/
+      #- name: Install terraform-docs
+       # run: |
+        #  curl -sLo terraform-docs.tar.gz https://github.com/terraform-docs/terraform-docs/releases/download/v0.16.0/terraform-docs-v0.16.0-linux-amd64.tar.gz
+         # tar -xzf terraform-docs.tar.gz
+          #sudo mv terraform-docs /usr/local/bin/
 
       # Step 11: Generate Terraform documentation
-      - name: Generate Terraform Documentation
-        run: terraform-docs markdown . > README.md
+      #- name: Generate Terraform Documentation
+       # run: terraform-docs markdown . > README.md
 
       # Step 12: Commit generated README.md
       - name: Commit and push README.md
