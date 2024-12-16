@@ -29,13 +29,13 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-       # Step 4: Validate Terraform
-      - name: Terraform Validate
-        run: terraform validate
-     
-      # Step 5: Initialize Terraform
+       # Step 4: Initialize Terraform
       - name: Terraform Init
         run: terraform init
+     
+      # Step 5: Validate Terraform
+      - name: Terraform Validate
+        run: terraform validate
 
       # Step 6: Plan Terraform changes
       - name: Terraform Plan
