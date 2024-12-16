@@ -42,36 +42,47 @@ jobs:
       - name: Terraform Validate
         run: terraform validate
 
-      # Step 6: Install Checkov
+      # Step 6: Install TFLint
+      - name: Install TFLint
+        run: |
+          curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+
+      # Step 7: Run TFLint
+      - name: Run TFLint
+        run: |
+          tflint --init
+          tflint
+
+      # Step 8: Install Checkov
       - name: Install Checkov
         run: |
           pip install checkov
 
-      # Step 7: Run Checkov on Terraform files
+      # Step 9: Run Checkov on Terraform files
       - name: Checkov Scan
         run: |
           checkov -d . --skip-check CKV_AWS_79,CKV_AWS_126,CKV_AWS_8,CKV_AWS_135,CKV2_AWS_41
 
-      # Step 8: Plan Terraform changes
+      # Step 10: Plan Terraform changes
       - name: Terraform Plan
         run: terraform plan
 
-      # Step 9: Apply Terraform changes
+      # Step 11: Apply Terraform changes
       - name: Terraform Apply
         run: terraform apply --auto-approve
 
-      # Step 10: Install terraform-docs
+      # Step 12: Install terraform-docs
       - name: Install terraform-docs
         run: |
           curl -sLo terraform-docs.tar.gz https://github.com/terraform-docs/terraform-docs/releases/download/v0.16.0/terraform-docs-v0.16.0-linux-amd64.tar.gz
           tar -xzf terraform-docs.tar.gz
           sudo mv terraform-docs /usr/local/bin/
 
-      # Step 11: Generate Terraform documentation
+      # Step 13: Generate Terraform documentation
       - name: Generate Terraform Documentation
         run: terraform-docs markdown . > README.md
 
-      # Step 12: Commit generated README.md
+      # Step 14: Commit generated README.md
       - name: Commit and push README.md
         run: |
           git config --global user.name "AnkitKumar"
